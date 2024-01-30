@@ -22,38 +22,38 @@
     <div class="container-fluid espaçamento">
 
         <div class="row">
-            <div class="col-4 celula" onclick="alert('Clicou')">
-                <span>x</span>
+            <div class="col-4 celula" >
+                <span onclick="trocaValor(this,0,0)">+</span>
             </div>
             <div class="col-4 celula">
-                <span>x</span>
+                <span onclick="trocaValor(this,0,1)">+</span>
             </div>
             <div class="col-4 celula">
-                <span>x</span>
-            </div>
-        </div> <!-- fim da div row-->
-
-        <div class="row">
-            <div class="col-4 celula">
-                <span>x</span>
-            </div>
-            <div class="col-4 celula">
-                <span>x</span>
-            </div>
-            <div class="col-4 celula">
-                <span>x</span>
+                <span onclick="trocaValor(this,0,2)">+</span>
             </div>
         </div> <!-- fim da div row-->
 
         <div class="row">
             <div class="col-4 celula">
-                <span>x</span>
+                <span onclick="trocaValor(this,1,0)">+</span>
             </div>
             <div class="col-4 celula">
-                <span>x</span>
+                <span onclick="trocaValor(this,1,1)">+</span>
             </div>
             <div class="col-4 celula">
-                <span>x</span>
+                <span onclick="trocaValor(this,1,1)">+</span>
+            </div>
+        </div> <!-- fim da div row-->
+
+        <div class="row">
+            <div class="col-4 celula">
+                <span onclick="trocaValor(this,2,0)">+</span>
+            </div>
+            <div class="col-4 celula">
+                <span onclick="trocaValor(this,2,1)">+</span>
+            </div>
+            <div class="col-4 celula">
+                <span onclick="trocaValor(this,2,2)">+</span>
             </div>
         </div> <!-- fim da div row-->
 
@@ -67,7 +67,32 @@
             [ "", "",""]
         ];
 
-        
+        let varJogador = 0;
+
+        function trocaValor(span, linha, coluna){
+         
+            varJogador += 1;
+
+            if(varJogador % 2 == 1){
+
+                if(span.innerHTML != 'O' && span.innerHTML != 'X'){
+                    matrizJogo[linha][coluna] = "O"
+
+                    span.innerHTML = 'O'
+                }
+                
+            }else{
+                if(span.innerHTML != 'O' && span.innerHTML != 'X'){
+                    matrizJogo[linha][coluna] = "X"
+
+                    span.innerHTML = 'X'
+                }
+            }
+
+            if( matrizJogo[0][0] == matrizJogo [0][1] && matrizJogo[0][2]){
+
+            }
+        } //Final função troca valor
 
         // function ajusteMatriz(){
         //     console.log(click)
