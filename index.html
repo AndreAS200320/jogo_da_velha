@@ -14,12 +14,25 @@
             text-align: center;
             font-size: 80px;
         }
+
+        span{
+            opacity: 0;
+        }
+
+        .text-center{
+            align-items: center;
+        }
     </style>
 
 </head>
 <body>
 
     <div class="container-fluid espaçamento">
+
+        <div class="row">
+            <h2 class="text-center">Vez do Jogador <strong id="tituloJogador">X</strong></h2>
+            <h1 id="quem-ganhou" class="text-center"></h1>
+        </div>
 
         <div class="row">
             <div class="col-4 celula" >
@@ -41,7 +54,7 @@
                 <span onclick="trocaValor(this,1,1)">+</span>
             </div>
             <div class="col-4 celula">
-                <span onclick="trocaValor(this,1,1)">+</span>
+                <span onclick="trocaValor(this,1,2)">+</span>
             </div>
         </div> <!-- fim da div row-->
 
@@ -69,30 +82,75 @@
 
         let varJogador = 0;
 
+        function color() {
+            let num = Math.floor(255 * Math.random() + 1)
+
+            return num
+        }
+
+        setInterval(() => {
+
+            const celula = document.getElementsByClassName('celula')
+            
+            for(x = 0; x < celula.length; x ++){ 
+                  
+                celula[x].style.backgroundColor = `rgb(${color()}, ${color()}, ${color()})`
+
+            }
+        }, 1000);
+
         function trocaValor(span, linha, coluna){
-         
-            varJogador += 1;
+
+            span.style.opacity = "1";
 
             if(varJogador % 2 == 1){
 
                 if(span.innerHTML != 'O' && span.innerHTML != 'X'){
+
                     matrizJogo[linha][coluna] = "O"
 
                     span.innerHTML = 'O'
+
+                    varJogador += 1;
+
+                    document.getElementById('tituloJogador').innerHTML = 'X';
+
                 }
+
                 
             }else{
+
                 if(span.innerHTML != 'O' && span.innerHTML != 'X'){
+
                     matrizJogo[linha][coluna] = "X"
 
                     span.innerHTML = 'X'
+
+                    varJogador += 1;                    
+  
+                    document.getElementById('tituloJogador').innerHTML = 'O';
+
                 }
+  
             }
 
-            if( matrizJogo[0][0] == matrizJogo [0][1] && matrizJogo[0][2]){
-
+            if(matrizJogo[linha][0] == matrizJogo[linha][1] && matrizJogo[linha][0] == matrizJogo[linha][2]){
+                document.getElementById('quem-ganhou').innerHTML = `O jogador ${matrizJogo[linha][coluna]} ganhou!!`
             }
+            if(matrizJogo[0][coluna] == matrizJogo[2][coluna] && matrizJogo[0][coluna] == matrizJogo[1][coluna]){
+                document.getElementById('quem-ganhou').innerHTML = `O jogador ${matrizJogo[linha][coluna]} ganhou!!` 
+            }
+            if((matrizJogo[0][0] == matrizJogo[1][1] && matrizJogo[1][1] == matrizJogo[2][2] && matrizJogo[1][1] != "") || (matrizJogo[0][2] == matrizJogo[1][1] && matrizJogo[1][1] == matrizJogo[2][0] && matrizJogo[1][1] != "")){
+                document.getElementById('quem-ganhou').innerHTML = `O jogador ${matrizJogo[1][1]} ganhou!!` 
+            }
+
+            //color
+
+            //setInterval()
+
         } //Final função troca valor
+
+        
 
         // function ajusteMatriz(){
         //     console.log(click)
